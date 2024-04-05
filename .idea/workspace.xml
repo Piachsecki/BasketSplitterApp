@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6502e8a4-0e53-494e-a1b1-b67b6b09d027" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/basket/BasketSplitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/basket/BasketSplitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/basket/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/basket/Delivery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/basket/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/basket/Product.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +89,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712348836604</updated>
-      <workItem from="1712348838240" duration="6679000" />
+      <workItem from="1712348838240" duration="11397000" />
     </task>
     <task id="LOCAL-00001" summary="Adding Files">
       <created>1712355624758</created>
@@ -94,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712355624758</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Reading a JSON format to our domain classes done.">
+      <created>1712355947026</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712355947026</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,6 +124,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding Files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Files" />
+    <MESSAGE value="Reading a JSON format to our domain classes done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reading a JSON format to our domain classes done." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/basket/BasketSplitter.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,16 +1,28 @@
 package org.example.basket;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import lombok.Getter;
 
 import java.util.List;
 
-@ToString
-@Data
 @AllArgsConstructor
+@Getter
 public class Product {
     private String name;
     private List<Delivery> deliveryMethods;
 
+    public String getName() {
+        return this.name;
+    }
+
+    public List<Delivery> getDeliveryMethods() {
+        return this.deliveryMethods;
+    }
+
+
+    @Override
+    public String toString() {
+        return name;
+
+    }
 }
