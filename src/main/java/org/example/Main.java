@@ -45,5 +45,8 @@ public class Main {
                 "Nut - Almond, Blanched, Whole"
         ));
 
+
+        System.out.println(basketSplitter.split(basket3));
+        System.out.println(basketSplitter.split(basket2));
     }
 }

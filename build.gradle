@@ -9,20 +9,48 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'org.apache.commons:commons-lang3:3.0'
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+ext{
+    gsonVersion = '2.10.1'
+    lombokVersion = '1.18.30'
+    jUnitVersion = '5.8.1'
+    guava = '32.1.3-jre'
+}
 
-    testImplementation 'com.google.guava:guava-testlib:32.1.3-jre'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+dependencies {
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "org.apache.commons:commons-lang3:3.0"
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.16.1"
+
+    testImplementation "com.google.guava:guava-testlib:$guava"
+    testImplementation "org.projectlombok:lombok:$lombokVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$jUnitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
 }
 
 test {
     useJUnitPlatform()
+}
+
+def mainClassName = 'org.example.Main'
+
+task runApp(type: JavaExec, dependsOn: 'build') {
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
+jar {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+ manifest {
+    attributes "Main-Class": mainClassName
+}
+
+from {
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+    archiveFileName = 'Kacper_Piasecki_Java_Wrocław.jar'
+
 }

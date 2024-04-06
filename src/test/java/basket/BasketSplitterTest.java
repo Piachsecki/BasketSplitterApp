@@ -1,6 +1,7 @@
-package org.example.basket;
+package basket;
 
 import com.google.common.collect.Maps;
+import org.example.basket.BasketSplitter;
 import org.example.domain.Delivery;
 import org.example.domain.Product;
 import org.example.exceptions.NoSuchProductException;
