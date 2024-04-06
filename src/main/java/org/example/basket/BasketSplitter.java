@@ -2,13 +2,15 @@ package org.example.basket;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.example.domain.Delivery;
+import org.example.domain.Product;
+import org.example.exceptions.NoSuchProductException;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BasketSplitter {
@@ -43,7 +45,7 @@ public class BasketSplitter {
     }
 
 
-    public Map<String, List<String>> split(List<String> items) {
+    public Map<Delivery, List<Product>> split(List<String> items) {
         Set<Delivery> allAvailableDeliveries = new HashSet<>();
         Map<Delivery, List<Product>> finalMap = new HashMap<>();
 
@@ -55,37 +57,66 @@ public class BasketSplitter {
 
             allAvailableDeliveries.addAll(deliveriesAvailableForSingleProduct);
         }
+
+
         Map<Delivery, List<Product>> productsForCertainDelivery = new HashMap<>();
         for (Delivery delivery : allAvailableDeliveries) {
             productsForCertainDelivery.put(delivery, new ArrayList<>());
         }
 
 
-
-
-
         for (String item : items) {
             Product product = getOrderedProductsStream(item)
-                    .findFirst().orElseThrow(() -> new RuntimeException("There is no product: " + item));
-            for (Delivery delivery : product.getDeliveryMethods()) {
-                if(productsForCertainDelivery.containsKey(delivery)){
+                    .findFirst().orElseThrow(() -> new NoSuchProductException("There is no product: " + item));
+            List<Delivery> deliveryMethods = product.getDeliveryMethods();
+            for (Delivery delivery : deliveryMethods) {
+                if (productsForCertainDelivery.containsKey(delivery)) {
                     productsForCertainDelivery.get(delivery).add(product);
                 }
             }
         }
 
-//        for (Map.Entry<Delivery, List<Product>> deliveryListEntry : productsForCertainDelivery.entrySet()) {
-//            deliveryListEntry.
-//            finalMap.put(deliveryListEntry.getKey(), deliveryListEntry.getValue());
-//            productsForCertainDelivery.
-//            System.out.println(deliveryListEntry.getValue().size());
-//        }
+        while (allListsEmpty(productsForCertainDelivery)) {
+            Delivery theMostCommonDeliveryMethod = findTheMostCommonDeliveryMethod(productsForCertainDelivery);
+            finalMap.put(theMostCommonDeliveryMethod, new ArrayList<>(productsForCertainDelivery.get(theMostCommonDeliveryMethod)));
+            removeProductsForDelivery(productsForCertainDelivery, theMostCommonDeliveryMethod);
+        }
+
+        return finalMap;
+    }
+
+    private boolean allListsEmpty(Map<Delivery, List<Product>> productsForCertainDelivery) {
+        for (List<Product> productList : productsForCertainDelivery.values()) {
+            if (!productList.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-        System.out.println(productsForCertainDelivery);
-        System.out.println(allAvailableDeliveries);
+    private void removeProductsForDelivery(Map<Delivery, List<Product>> productsForCertainDelivery, Delivery delivery) {
+        if (Objects.nonNull(delivery)) {
+            for (List<Product> productList : productsForCertainDelivery.values()) {
+                productList.removeIf(product -> product.getDeliveryMethods().contains(delivery));
+            }
+        }
+    }
 
-        return null;
+
+    private Delivery findTheMostCommonDeliveryMethod(Map<Delivery, List<Product>> productsForCertainDelivery) {
+        Delivery deliveryWithMaxProducts = null;
+        int maxProducts = 0;
+
+        for (Map.Entry<Delivery, List<Product>> entry : productsForCertainDelivery.entrySet()) {
+            int currentSize = entry.getValue().size();
+            if (currentSize > maxProducts) {
+                maxProducts = currentSize;
+                deliveryWithMaxProducts = entry.getKey();
+            }
+        }
+        return deliveryWithMaxProducts;
+
     }
 
     private Stream<Product> getOrderedProductsStream(String item) {

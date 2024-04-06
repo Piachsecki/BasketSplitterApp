@@ -1,7 +1,8 @@
-package org.example.basket;
+package org.example.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.example.domain.Delivery;
 
 import java.util.List;
 

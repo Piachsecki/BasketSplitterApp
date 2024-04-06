@@ -38,6 +38,6 @@ public class Main {
                 "Tea - Apple Green Tea"
 ));
 
-        basketSplitter.split(basket2);
+        System.out.println(basketSplitter.split(basket2));
     }
 }

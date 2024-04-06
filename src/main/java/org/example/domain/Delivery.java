@@ -1,4 +1,4 @@
-package org.example.basket;
+package org.example.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
