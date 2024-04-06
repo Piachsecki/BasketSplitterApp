@@ -2,6 +2,7 @@ package org.example.basket;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import lombok.Getter;
 import org.example.domain.Delivery;
 import org.example.domain.Product;
 import org.example.exceptions.NoSuchProductException;
@@ -11,10 +12,12 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Getter
 public class BasketSplitter {
-    private List<Product> products;
+    private final List<Product> products;
 
     public BasketSplitter(String absolutePathToConfigFile) {
         products = new ArrayList<>();
@@ -45,23 +48,48 @@ public class BasketSplitter {
     }
 
 
-    public Map<Delivery, List<Product>> split(List<String> items) {
-        Set<Delivery> allAvailableDeliveries = new HashSet<>();
+    public Map<String, List<String>>  split(List<String> items) {
         Map<Delivery, List<Product>> finalMap = new HashMap<>();
+        Map<Delivery, List<Product>> productsForCertainDelivery = makeMapOutOfStringList(items);
 
+        while (theListIsNotEmpty(productsForCertainDelivery)) {
+            Delivery theMostCommonDeliveryMethod = findTheMostCommonDeliveryMethod(productsForCertainDelivery);
+            finalMap.put(theMostCommonDeliveryMethod, new ArrayList<>(productsForCertainDelivery.get(theMostCommonDeliveryMethod)));
+            removeProductsForDelivery(productsForCertainDelivery, theMostCommonDeliveryMethod);
+        }
+
+        return mapToExpectedStringMap(finalMap);
+    }
+    private Map<String, List<String>> mapToExpectedStringMap(Map<Delivery, List<Product>> finalMap) {
+        Map<String, List<String>> result = new HashMap<>();
+        for (Map.Entry<Delivery, List<Product>> deliveryListEntry : finalMap.entrySet()) {
+            List<String> listOfProducts = changeListOfProductsToListOfStrings(deliveryListEntry.getValue());
+            result.put(
+                    deliveryListEntry.getKey().toString(),
+                    listOfProducts);
+        }
+        return result;
+    }
+
+    private List<String> changeListOfProductsToListOfStrings(List<Product> value) {
+        return value.stream().map(Product::getName).collect(Collectors.toList());
+    }
+
+    private Map<Delivery, List<Product>> makeMapOutOfStringList(List<String> items) {
+        Map<Delivery, List<Product>> result = new HashMap<>();
+        Set<Delivery> allAvailableDeliveries = new HashSet<>();
         for (String item : items) {
             List<Delivery> deliveriesAvailableForSingleProduct = getOrderedProductsStream(item)
                     .map(Product::getDeliveryMethods)
                     .flatMap(List::stream)
-                    .toList();
+                    .collect(Collectors.toList());
 
             allAvailableDeliveries.addAll(deliveriesAvailableForSingleProduct);
         }
 
 
-        Map<Delivery, List<Product>> productsForCertainDelivery = new HashMap<>();
         for (Delivery delivery : allAvailableDeliveries) {
-            productsForCertainDelivery.put(delivery, new ArrayList<>());
+            result.put(delivery, new ArrayList<>());
         }
 
 
@@ -70,22 +98,15 @@ public class BasketSplitter {
                     .findFirst().orElseThrow(() -> new NoSuchProductException("There is no product: " + item));
             List<Delivery> deliveryMethods = product.getDeliveryMethods();
             for (Delivery delivery : deliveryMethods) {
-                if (productsForCertainDelivery.containsKey(delivery)) {
-                    productsForCertainDelivery.get(delivery).add(product);
+                if (result.containsKey(delivery)) {
+                    result.get(delivery).add(product);
                 }
             }
         }
-
-        while (allListsEmpty(productsForCertainDelivery)) {
-            Delivery theMostCommonDeliveryMethod = findTheMostCommonDeliveryMethod(productsForCertainDelivery);
-            finalMap.put(theMostCommonDeliveryMethod, new ArrayList<>(productsForCertainDelivery.get(theMostCommonDeliveryMethod)));
-            removeProductsForDelivery(productsForCertainDelivery, theMostCommonDeliveryMethod);
-        }
-
-        return finalMap;
+        return result;
     }
 
-    private boolean allListsEmpty(Map<Delivery, List<Product>> productsForCertainDelivery) {
+    private boolean theListIsNotEmpty(Map<Delivery, List<Product>> productsForCertainDelivery) {
         for (List<Product> productList : productsForCertainDelivery.values()) {
             if (!productList.isEmpty()) {
                 return true;

@@ -38,6 +38,12 @@ public class Main {
                 "Tea - Apple Green Tea"
 ));
 
-        System.out.println(basketSplitter.split(basket2));
+
+        List<String> basket3 = new ArrayList<>(List.of(
+                "Fond - Chocolate",
+                "Chocolate - Unsweetened",
+                "Nut - Almond, Blanched, Whole"
+        ));
+
     }
 }
