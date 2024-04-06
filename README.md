@@ -5,7 +5,15 @@
 </p>
 
 ## About The Project
-The project realised as a part of the recruitment process for the OCADO Tech company.
+The project realised as a part of the recruitment process for the OCADO Tech company. Without clear recruitments specified I decided to create a more scalable application.
+Instead of using Strings and List of Strings I decided to map the JSON objects into real Data Structures
+* `Product.class`
+* `Delivery.class`
+
+At the first glance this change might look hilarious and unnecessary, but
+in case of growth of the app, we are able to adapt faster and more efficient to upcoming changes and provide more real and reliable outcome.
+Adding fields such as:  `BigDecimal price` or `String description` or `Date approximateDaysToDeliver` are now possible and with the usage of GSON Library
+they can be easily mapped from the config file.
 
 ## Recruitments
 * > Twoim zadaniem jest stworzenie biblioteki, która podzieli przedmioty w koszyku klienta na grupy dostaw. Zdefiniowaliśmy już API, które chcielibyśmy wykorzystać w naszym programie
