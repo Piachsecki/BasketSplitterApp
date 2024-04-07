@@ -7,8 +7,6 @@
     <list default="true" id="6502e8a4-0e53-494e-a1b1-b67b6b09d027" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/basket/BasketSplitterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/basket/BasketSplitterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,36 +35,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="BasketSplitterApp" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BasketSplitterApp" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build setup" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BasketSplitterApp" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="documentation" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BasketSplitterApp" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="help" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BasketSplitterApp" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BasketSplitterApp" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -266,6 +234,7 @@
       <workItem from="1712348838240" duration="11488000" />
       <workItem from="1712392536658" duration="10871000" />
       <workItem from="1712413530222" duration="13519000" />
+      <workItem from="1712478884800" duration="1271000" />
     </task>
     <task id="LOCAL-00001" summary="Adding Files">
       <created>1712355624758</created>
@@ -295,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712407304720</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[hot-fix] Cleaned up code and configuration file: build.gradle.">
+      <created>1712438487270</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712438487270</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,6 +293,7 @@
     <MESSAGE value="Reading a JSON format to our domain classes done." />
     <MESSAGE value="BasketSplitter split function partly implemented covering the finding the right product and sorting them by available deliveries." />
     <MESSAGE value="BasketSplitter split function basic logic implemented. Sorted Classes and Files to proper packages." />
-    <option name="LAST_COMMIT_MESSAGE" value="BasketSplitter split function basic logic implemented. Sorted Classes and Files to proper packages." />
+    <MESSAGE value="[hot-fix] Cleaned up code and configuration file: build.gradle." />
+    <option name="LAST_COMMIT_MESSAGE" value="[hot-fix] Cleaned up code and configuration file: build.gradle." />
   </component>
 </project>
